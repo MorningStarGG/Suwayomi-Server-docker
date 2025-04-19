@@ -19,7 +19,7 @@ jobs:
         run: |
           cd main
           total_downloads_previous=$(jq -r '.total_downloads' scripts/tachidesk_version.json)
-          total_downloads=$(curl -s https://github.com/Suwayomi/docker-tachidesk/pkgs/container/tachidesk | grep -A1 "Total downloads" | tr -d \\n | egrep -o "Total download.*.=\"[0-9]+\">" | cut -f2 -d"=" | egrep -o "[0-9]+")
+          total_downloads=$(curl -s https://github.com/MorningStarGG/docker-tachidesk/pkgs/container/tachidesk | grep -A1 "Total downloads" | tr -d \\n | egrep -o "Total download.*.=\"[0-9]+\">" | cut -f2 -d"=" | egrep -o "[0-9]+")
           if [[ $total_downloads != $total_downloads_previous ]]; then
                git pull
                echo "`jq --arg value "$total_downloads" '.total_downloads=$value' scripts/tachidesk_version.json`" > scripts/tachidesk_version.json
