@@ -16,7 +16,7 @@ on:
 
 env:
   server_repo: ${{ inputs.tachidesk_release_type == 'stable' && 'Suwayomi-Server' || 'Suwayomi-Server-preview' }}
-  test_image_tag: ghcr.io/MorningStarGG/suwayomi-server-test:testing
+  test_image_tag: ghcr.io/morningstargg/suwayomi-server-test:testing
   this_actions_run_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
 jobs:
@@ -175,12 +175,12 @@ jobs:
             TACHIDESK_FILENAME=${{ steps.get_latest_release_metadata.outputs.release_filename }}
             TACHIDESK_DOCKER_GIT_COMMIT=${{ steps.get_latest_release_metadata.outputs.tachidesk_docker_git_commit }}
           tags: |
-            ${{ inputs.tachidesk_release_type == 'stable' && 'ghcr.io/MorningStarGG/tachidesk:latest' || '' }}
-            ghcr.io/MorningStarGG/tachidesk:${{ inputs.tachidesk_release_type }}
-            ghcr.io/MorningStarGG/tachidesk:${{ steps.get_latest_release_metadata.outputs.release_tag }}
-            ${{ inputs.tachidesk_release_type == 'stable' && 'ghcr.io/MorningStarGG/suwayomi-server:latest' || '' }}
-            ghcr.io/MorningStarGG/suwayomi-server:${{ inputs.tachidesk_release_type }}
-            ghcr.io/MorningStarGG/suwayomi-server:${{ steps.get_latest_release_metadata.outputs.release_tag }}
+            ${{ inputs.tachidesk_release_type == 'stable' && 'ghcr.io/morningstargg/tachidesk:latest' || '' }}
+            ghcr.io/morningstargg/tachidesk:${{ inputs.tachidesk_release_type }}
+            ghcr.io/morningstargg/tachidesk:${{ steps.get_latest_release_metadata.outputs.release_tag }}
+            ${{ inputs.tachidesk_release_type == 'stable' && 'ghcr.io/morningstargg/suwayomi-server:latest' || '' }}
+            ghcr.io/morningstargg/suwayomi-server:${{ inputs.tachidesk_release_type }}
+            ghcr.io/morningstargg/suwayomi-server:${{ steps.get_latest_release_metadata.outputs.release_tag }}
 
       # - name: Create slim container
       #   uses: kitabisa/docker-slim-action@v1
@@ -188,13 +188,13 @@ jobs:
       #     DSLIM_HTTP_PROBE: false
       #     DSLIM_PRESERVE_PATH: /opt/java/openjdk/lib,/opt/java/openjdk/conf,/home/suwayomi/.local/share/Tachidesk
       #   with:
-      #     target: ghcr.io/MorningStarGG/suwayomi-server:${{ inputs.tachidesk_release_type }}
+      #     target: ghcr.io/morningstargg/suwayomi-server:${{ inputs.tachidesk_release_type }}
       #     tag: '${{ inputs.tachidesk_release_type }}-slim'
 
       # - name: Tag slim container and push registery to repository
       #   run: |
-          # docker tag ghcr.io/MorningStarGG/suwayomi-server:${{ inputs.tachidesk_release_type }}-slim ghcr.io/MorningStarGG/suwayomi-server:${{ steps.get_latest_release_metadata.outputs.release_tag }}-slim
+          # docker tag ghcr.io/morningstargg/suwayomi-server:${{ inputs.tachidesk_release_type }}-slim ghcr.io/morningstargg/suwayomi-server:${{ steps.get_latest_release_metadata.outputs.release_tag }}-slim
           # if [ "${{ inputs.tachidesk_release_type }}" == "stable" ]; then
-          #   docker tag ghcr.io/MorningStarGG/suwayomi-server:${{ inputs.tachidesk_release_type }}-slim ghcr.io/MorningStarGG/suwayomi-server:latest-slim
+          #   docker tag ghcr.io/morningstargg/suwayomi-server:${{ inputs.tachidesk_release_type }}-slim ghcr.io/morningstargg/suwayomi-server:latest-slim
           # fi
-          # docker image push "ghcr.io/MorningStarGG/suwayomi-server" --all-tags
+          # docker image push "ghcr.io/morningstargg/suwayomi-server" --all-tags
